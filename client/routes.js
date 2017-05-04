@@ -1,6 +1,6 @@
 FlowRouter.route('/processedUrl/:_id', {
   action: function() {
-    BlazeLayout.render('layout', { main: "processedUrl" });
+    BlazeLayout.render('layout', { main: "importResult" });
   }
 });
 
