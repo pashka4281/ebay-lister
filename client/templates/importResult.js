@@ -16,13 +16,11 @@ Template.importResult.helpers({
   }
 });
 
+import 'ckeditor';
+
 // scrapedPageForm template
 Template.scrapedPageForm.onRendered(function() {
-  this.$('#details-area').summernote({
-    popover: {
-      image: [],
-      link: [],
-      air: []
-    }
+  CKEDITOR.replace( 'details-area', {
+    height: 560
   });
 });
