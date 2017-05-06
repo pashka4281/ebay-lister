@@ -4,9 +4,11 @@ FlowRouter.route('/scrapedPages/:_id', {
   }
 });
 
-
 FlowRouter.route('/', {
   action: function() {
-    BlazeLayout.render('layout', { main: "importByUrl" });
+    if (Meteor.userId())
+      BlazeLayout.render('layout', { main: "importByUrl" });
+    else
+      BlazeLayout.render('layout', { main: "login" });
   }
 });
