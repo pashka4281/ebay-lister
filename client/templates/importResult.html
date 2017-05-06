@@ -1,3 +1,9 @@
 <template name="importResult">
   <h1>Imported:</h1>
+
+  {{#if Template.subscriptionsReady }}
+    {{ scrapedPage.createdAt }}
+  {{ else }}
+    {{> spinner }}
+  {{/if}}
 </template>
