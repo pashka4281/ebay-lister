@@ -2,13 +2,24 @@
   <h1>Imported:</h1>
 
   {{#if Template.subscriptionsReady }}
+    {{> scrapedPageForm scrapedPage=scrapedPage }}
+
+    <hr>
     {{ scrapedPage.createdAt }}
+  {{ else }}
+    {{> spinner }}
+  {{/if}}
+</template>
+
+<template name="scrapedPageForm">
+  <form>
     <div class="form-group">
       <label class="form-control-label" for="title">Title</label>
       <input value="{{ scrapedPage.scrapedData.title }}" class="form-control" id="title" />
     </div>
-    <div class="details">
-      {{{ scrapedPage.scrapedData.details }}}
+
+    <div class="form-group">
+      <div id="details-area">{{{ scrapedPage.scrapedData.details }}}</div>
     </div>
 
     <div class="form-group">
@@ -16,7 +27,6 @@
       <input value="{{ scrapedPage.scrapedData.price }}" class="form-control" id="price" />
     </div>
 
-  {{ else }}
-    {{> spinner }}
-  {{/if}}
+    <button type="submit" class="btn btn-success">Publish to eBay</button>
+  </form>
 </template>

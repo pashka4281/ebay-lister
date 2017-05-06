@@ -15,3 +15,14 @@ Template.importResult.helpers({
     return ScrapedPages.findOne(FlowRouter.current().params._id);
   }
 });
+
+// scrapedPageForm template
+Template.scrapedPageForm.onRendered(function() {
+  this.$('#details-area').summernote({
+    popover: {
+      image: [],
+      link: [],
+      air: []
+    }
+  });
+});
