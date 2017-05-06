@@ -1,4 +1,4 @@
-FlowRouter.route('/processedUrl/:_id', {
+FlowRouter.route('/scrapedPages/:_id', {
   action: function() {
     BlazeLayout.render('layout', { main: "importResult" });
   }

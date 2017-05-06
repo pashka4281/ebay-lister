@@ -20,13 +20,13 @@ Template.importByUrl.events({
     t.formError.set("");
     let url = t.$('input[name="url"]').val();
 
-    Meteor.call('parseUrl', url, function(err, processedUrlId) {
+    Meteor.call('parseUrl', url, function(err, scrapedPageId) {
       if (err) {
         t.formError.set(err.error);
         return;
       }
 
-      FlowRouter.go(`/processedUrl/${ processedUrlId  }`);
+      FlowRouter.go(`/scrapedPages/${ scrapedPageId }`);
     });
   }
 });
