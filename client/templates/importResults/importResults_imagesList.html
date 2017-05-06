@@ -1,0 +1,18 @@
+<template name="importResults_imagesList">
+  <div class="images-list">
+    <div class="big-image-preview">
+      {{#if selectedImg }}
+        <img src="{{ selectedImg }}" class="img-thumbnail" />
+      {{/if}}
+    </div>
+    <ul>
+      {{#each img in images }}
+        <li>
+          <a href="{{@index}}">
+            <img src="{{ img }}" class="img-thumbnail" />
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</template>

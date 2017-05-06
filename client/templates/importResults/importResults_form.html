@@ -1,24 +1,18 @@
-<template name="importResult">
-  <h1>Imported:</h1>
-
-  {{#if Template.subscriptionsReady }}
-    {{> scrapedPageForm scrapedPage=scrapedPage }}
-
-    <hr>
-    {{ scrapedPage.createdAt }}
-  {{ else }}
-    {{> spinner }}
-  {{/if}}
-</template>
-
-<template name="scrapedPageForm">
+<template name="importResults_form">
   <form>
     <div class="form-group">
       <label class="form-control-label" for="title">Title</label>
       <input value="{{ scrapedPage.scrapedData.title }}" class="form-control" id="title" />
     </div>
 
+
     <div class="form-group">
+      <label class="form-control-label">Images</label>
+      {{> importResults_imagesList images=scrapedPage.scrapedData.images }}
+    </div>
+
+    <div class="form-group">
+      <label class="form-control-label" for="details-area">Description</label>
       <textarea id="details-area">{{{ scrapedPage.scrapedData.details }}}</textarea>
     </div>
 

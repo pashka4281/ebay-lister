@@ -1,6 +1,6 @@
 FlowRouter.route('/scrapedPages/:_id', {
   action: function() {
-    BlazeLayout.render('layout', { main: "importResult" });
+    BlazeLayout.render('layout', { main: "importResults_Page" });
   }
 });
 
