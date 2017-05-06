@@ -1,6 +1,6 @@
 <template name="importByUrl">
   <h2>Import</h2>
-  <form>
+  <form class="mb-5">
     <div class="form-group {{#if formError}}has-danger{{/if}}">
       <label> Put URL in the box below </label>
       <input type="text" class="form-control form-control-lg {{#if formError}}form-control-danger{{/if}}" name="url" placeholder="http://...." />
@@ -16,4 +16,15 @@
       {{> spinner }}
     {{/unless}}
   </form>
+
+  <h5> Recently scraped pages </h5>
+  {{#if recentlyScrapedPages.length }}
+    <ul>
+      {{#each page in recentlyScrapedPages }}
+      <li><a href="/scrapedPages/{{ page._id }}"> {{ page.url}} </a></li>
+      {{/each}}
+    </ul>
+  {{ else }}
+    <div class="text-muted">No recent activity</div>
+  {{/if}}
 </template>

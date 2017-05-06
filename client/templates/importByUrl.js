@@ -1,11 +1,13 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { ScrapedPages } from '/common/collections';
 
 import './importByUrl.html';
 
 Template.importByUrl.onCreated(function() {
-  this.formError = new ReactiveVar("");
+  this.formError    = new ReactiveVar("");
   this.isProcessing = new ReactiveVar(false);
+  this.subscribe('recentlyScrapedPages');
 });
 
 Template.importByUrl.helpers({
@@ -17,6 +19,10 @@ Template.importByUrl.helpers({
   'isProcessing': function() {
     let t = Template.instance();
     return t.isProcessing.get();
+  },
+
+  'recentlyScrapedPages': function() {
+    return ScrapedPages.find({}, {sort: { createdAt: -1}}).fetch();
   }
 });
 
