@@ -9,7 +9,8 @@ Meteor.methods({
 
     let newPageId  = ScrapedPages.insert({
       scrapedData : parserData,
-      createdAt   : new Date
+      createdAt   : new Date,
+      url         : url
     });
     return newPageId;
   }
