@@ -5,7 +5,7 @@ import { ScrapedPages } from '../common/collections';
 Meteor.methods({
   'parseUrl': function(url) {
     let scraper    = Scrapers.findScraperByUrl(url);
-    let parserData = scraper.parse(url);
+    let parserData = JSON.parse(scraper.parse(url));
 
     let newPageId  = ScrapedPages.insert({
       scrapedData : parserData,

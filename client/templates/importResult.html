@@ -3,6 +3,10 @@
 
   {{#if Template.subscriptionsReady }}
     {{ scrapedPage.createdAt }}
+    <div class="details">
+      {{{ scrapedPage.scrapedData.details }}}
+    </div>
+
   {{ else }}
     {{> spinner }}
   {{/if}}
