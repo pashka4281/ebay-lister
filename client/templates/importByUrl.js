@@ -22,7 +22,6 @@ Template.importByUrl.events({
 
     Meteor.call('parseUrl', url, function(err, processedUrlId) {
       if (err) {
-        console.log(err);
         t.formError.set(err.error);
         return;
       }
