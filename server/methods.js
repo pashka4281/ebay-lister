@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Scrapers } from './scrapers';
 import { ScrapedPages } from '../common/collections';
+import { ebayAPI } from './ebayAPI';
 
 Meteor.methods({
   'parseUrl': function(url) {
@@ -13,5 +14,24 @@ Meteor.methods({
       url         : url
     });
     return newPageId;
+  },
+
+  'setAuthToken': function(token) {
+    let userId = Meteor.userId();
+
+    Meteor.users.update({ _id: userId }, {
+      $set: {
+        'profile.ebayAuthToken': token
+      }
+    });
+  },
+
+  'ebay.findItemsByKeywords': function() {
+    let items = ebayAPI.findItemsByKeywords(["Canon", "Powershot"]);
+    return items;
+  },
+
+  'ebay.getCategory': function() {
+    return ebayAPI.getCategory();
   }
 });

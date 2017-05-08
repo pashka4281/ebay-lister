@@ -1,0 +1,11 @@
+{
+  "environment": "dev",
+  "public" : {
+    "mode" : "dev"
+  },
+  "eBay": {
+    "appId": "PavloS-xLIster-SBX-508faa0a3-0cfbaebc",
+    "devId": "74f46385-0282-40bb-b229-e874f7cdb683",
+    "certId": "SBX-08faa0a30e42-9784-4ff0-981b-9621"
+  }
+}
