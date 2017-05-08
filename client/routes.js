@@ -4,6 +4,12 @@ FlowRouter.route('/scrapedPages/:_id', {
   }
 });
 
+FlowRouter.route('/profile', {
+  action: function() {
+    BlazeLayout.render('layout', { main: "profile_Page" });
+  }
+});
+
 FlowRouter.route('/', {
   action: function() {
     if (Meteor.userId())
