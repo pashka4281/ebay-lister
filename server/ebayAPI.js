@@ -25,33 +25,6 @@ let ebayAPI = {
     });
 
     return response.Categorys; // <- that's suuper weird spelling, I know ¯\_(ツ)_/¯
-  },
-
-  findItemsByKeywords: function(keywords=[]) {
-    var params = {
-      keywords        : keywords,
-      outputSelector  : ['AspectHistogram'],
-      paginationInput : { entriesPerPage: 10 },
-      domainFilter    : [ {name: 'domainName', value: 'Digital_Cameras'} ],
-      itemFilter: [
-        {name: 'FreeShippingOnly', value: true},
-        {name: 'MaxPrice', value: '150'}
-      ]
-    };
-
-    let itemsResponse = xmlRequestSync( {
-      serviceName: 'Finding',
-      opType: 'findItemsByKeywords',
-      appId: 'PavloS-xLIster-PRD-e08f655c9-281d827d',
-      params: params,
-      parser: ebay.parseResponseJson
-    });
-
-    var items = itemsResponse.searchResult.item;
-    return items;
-  },
-
-  _makeRequest: function() {
   }
 };
 
