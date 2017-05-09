@@ -21,6 +21,24 @@
       <input value="{{ scrapedPage.scrapedData.price }}" class="form-control" id="price" />
     </div>
 
+    <div class="form-group">
+      <label class="form-control-label" for="price">Category</label>
+      <select class="form-control">
+        {{#if isCategoriesLoading }}
+          <option>Loading ...</option>
+        {{ else }}
+          {{#if categories.length }}
+            <option>Select a category...</option>
+            {{#each category in categories }}
+              <option value="{{ category.CategoryID }}">{{ category.CategoryName }}</option>
+            {{/each}}
+          {{ else }}
+            <option>No categories loaded</option>
+          {{/if }}
+        {{/if }}
+      </select>
+    </div>
+
     <button type="submit" class="btn btn-success">Publish to eBay</button>
   </form>
 </template>

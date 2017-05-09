@@ -24,7 +24,7 @@ let ebayAPI = {
       parser: ebay.parseResponseJson
     });
 
-    return response;
+    return response.Categorys; // <- that's suuper weird spelling, I know ¯\_(ツ)_/¯
   },
 
   findItemsByKeywords: function(keywords=[]) {
