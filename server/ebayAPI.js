@@ -15,9 +15,11 @@ let ebayAPI = {
       devId: Meteor.settings.eBay.devId,
       certId: Meteor.settings.eBay.certId,
       authToken: user.profile.ebayAuthToken,
+      sandbox: Meteor.settings.eBay.isSandbox,
       params: {
         CategorySiteID: "0",
-        DetailLevel: "ReturnAll"
+        DetailLevel: "ReturnAll",
+        LevelLimit: 1
       },
       parser: ebay.parseResponseJson
     });
