@@ -5,8 +5,19 @@ let apiEndpoint = "https://api.sandbox.ebay.com/ws/api.dll";
 let xmlRequestSync = Meteor.wrapAsync(ebay.xmlRequest);
 
 let ebayAPI = {
-  getCategory: function() {
+  getCategory: function(parentCategoryId) {
     let user = Meteor.user();
+
+    let params = {
+      CategorySiteID: "0",
+      DetailLevel: "ReturnAll",
+      LevelLimit: 1
+    };
+
+    if (parentCategoryId) {
+      params.CategoryParent = parentCategoryId;
+      params.LevelLimit = 2;
+    }
 
     let response = xmlRequestSync( {
       serviceName: 'Trading',
@@ -16,15 +27,13 @@ let ebayAPI = {
       certId: Meteor.settings.eBay.certId,
       authToken: user.profile.ebayAuthToken,
       sandbox: Meteor.settings.eBay.isSandbox,
-      params: {
-        CategorySiteID: "0",
-        DetailLevel: "ReturnAll",
-        LevelLimit: 1
-      },
+      params: params,
       parser: ebay.parseResponseJson
     });
 
-    return response.Categorys; // <- that's suuper weird spelling, I know ¯\_(ツ)_/¯
+    let categories = response.Categorys; // <- that's suuper weird spelling, I know ¯\_(ツ)_/¯
+    let currentLevelCategories = _.filter(categories, (c) => c.CategoryLevel == params.LevelLimit);
+    return currentLevelCategories;
   }
 };
 

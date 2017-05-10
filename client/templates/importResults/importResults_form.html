@@ -5,7 +5,6 @@
       <input value="{{ scrapedPage.scrapedData.title }}" class="form-control" id="title" />
     </div>
 
-
     <div class="form-group">
       <label class="form-control-label">Images</label>
       {{> importResults_imagesList images=scrapedPage.scrapedData.images }}
@@ -21,22 +20,15 @@
       <input value="{{ scrapedPage.scrapedData.price }}" class="form-control" id="price" />
     </div>
 
-    <div class="form-group">
-      <label class="form-control-label" for="price">Category</label>
-      <select class="form-control">
-        {{#if isCategoriesLoading }}
-          <option>Loading ...</option>
-        {{ else }}
-          {{#if categories.length }}
-            <option>Select a category...</option>
-            {{#each category in categories }}
-              <option value="{{ category.CategoryID }}">{{ category.CategoryName }}</option>
-            {{/each}}
-          {{ else }}
-            <option>No categories loaded</option>
-          {{/if }}
-        {{/if }}
-      </select>
+    <div class="form-group row">
+      <div class="col-6">
+        {{> importResults_categorySelect label="Category" inputName="categoryId" }}
+      </div>
+      <div class="col-6">
+        {{# each parentCategoryId in getCurrentCategoryId }}
+          {{> importResults_categorySelect label="Subcategory" inputName="subcategoryId" parentCategoryId=parentCategoryId }}
+        {{/each}}
+      </div>
     </div>
 
     <button type="submit" class="btn btn-success">Publish to eBay</button>
