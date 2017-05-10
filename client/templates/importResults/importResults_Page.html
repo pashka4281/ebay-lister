@@ -10,21 +10,3 @@
     {{> spinner }}
   {{/if}}
 </template>
-
-
-<template name="imagesList">
-  <div id="image-preview">
-    {{#if selectedImg }}
-      <img src="{{ selectedImg }}" />
-    {{/if}}
-  </div>
-  <ul>
-    {{#each img in images }}
-      <li>
-        <a href="{{@index}}">
-          <img src="{{ img }}" />
-        </a>
-      </li>
-    {{/each}}
-  </ul>
-</template>
