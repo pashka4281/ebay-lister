@@ -17,7 +17,21 @@
 
     <div class="form-group">
       <label class="form-control-label" for="price">Price</label>
-      <input value="{{ scrapedPage.scrapedData.price }}" class="form-control" id="price" />
+
+      <div class="row">
+        <div class="col-2">
+          <input value="{{ scrapedPage.scrapedData.price }}" class="form-control" id="original-price" disabled />
+        </div>
+        <div class="col-1 text-center lead">X</div>
+        <div class="col-2">
+          <input value="1.4" class="form-control" id="price-multiplier" />
+        </div>
+        <div class="col-1 text-center lead">=</div>
+        <div class="col-2">
+          <input class="form-control" id="resulting-price" name="total-price" />
+          <small>(Total price)</small>
+        </div>
+      </div>
     </div>
 
     <div class="form-group row">
