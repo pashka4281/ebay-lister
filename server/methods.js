@@ -16,12 +16,13 @@ Meteor.methods({
     return newPageId;
   },
 
-  'setAuthToken': function(token) {
+  'updateProfile': function(token, paypalEmail) {
     let userId = Meteor.userId();
 
     Meteor.users.update({ _id: userId }, {
       $set: {
-        'profile.ebayAuthToken': token
+        'profile.ebayAuthToken': token,
+        'profile.paypalEmailAddress': paypalEmail
       }
     });
   },
@@ -33,5 +34,10 @@ Meteor.methods({
 
   'ebay.getCategory': function(parentCategoryId) {
     return ebayAPI.getCategory(parentCategoryId);
+  },
+
+  'ebay.validateItemBeforeSubmitting': function() {
+    return ebayAPI.validateItemBeforeSubmitting();
   }
+
 });
