@@ -1,8 +1,10 @@
 import ebay from 'ebay-api';
 import { Meteor } from 'meteor/meteor';
+import xml2js from 'xml2js';
 
-let apiEndpoint = "https://api.sandbox.ebay.com/ws/api.dll";
+let apiEndpoint    = "https://api.sandbox.ebay.com/ws/api.dll";
 let xmlRequestSync = Meteor.wrapAsync(ebay.xmlRequest);
+let parseXmlSync   = Meteor.wrapAsync(xml2js.parseString);
 
 let ebayAPI = {
   getCategory: function(parentCategoryId) {
@@ -86,19 +88,25 @@ let ebayAPI = {
         Site: "US"
       }
     };
-    let response = xmlRequestSync( {
-      serviceName: 'Trading',
-      opType: 'VerifyAddItem',
-      appId: Meteor.settings.eBay.appId,
-      devId: Meteor.settings.eBay.devId,
-      certId: Meteor.settings.eBay.certId,
-      authToken: user.profile.ebayAuthToken,
-      sandbox: Meteor.settings.eBay.isSandbox,
-      params: params,
-      parser: ebay.parseResponseJson
-    });
 
-    console.log(response)
+    try {
+      let response = xmlRequestSync({
+        serviceName: 'Trading',
+        opType: 'VerifyAddItem',
+        appId: Meteor.settings.eBay.appId,
+        devId: Meteor.settings.eBay.devId,
+        certId: Meteor.settings.eBay.certId,
+        authToken: user.profile.ebayAuthToken,
+        sandbox: Meteor.settings.eBay.isSandbox,
+        params: params,
+        parser: ebay.parseResponseJson
+      });
+
+      console.log(response)
+    } catch(err) {
+      let parsed = parseXmlSync(err.requestContext.response.body)
+      return parsed.VerifyAddItemResponse;
+    }
   }
 };
 
