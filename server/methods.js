@@ -38,6 +38,20 @@ Meteor.methods({
 
   'ebay.validateItemBeforeSubmitting': function() {
     return ebayAPI.validateItemBeforeSubmitting();
-  }
+  },
+
+  //'scrapedPages.updateWithEbayData': function(scapedPageId, formData) {
+    //check(formData, {
+      //title       : String,
+      //description : String,
+      //categoryId  : Integer,
+      //price       : Integer
+    //});
+
+    //let updatedNum = ScrapedPages.update({_id: scrapedPageId }, {$set: {
+      //ebayParams: formData
+    //}});
+    //return updatedNum;
+  //}
 
 });

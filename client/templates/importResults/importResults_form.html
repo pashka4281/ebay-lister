@@ -28,7 +28,7 @@
         </div>
         <div class="col-1 text-center lead">=</div>
         <div class="col-2">
-          <input class="form-control" id="resulting-price" name="total-price" />
+          <input type="text" class="form-control" id="resulting-price" name="total-price" />
           <small>(Total price)</small>
         </div>
       </div>
@@ -43,6 +43,33 @@
           {{> importResults_categorySelect label="Subcategory" inputName="subcategoryId" parentCategoryId=parentCategoryId }}
         {{/each}}
       </div>
+    </div>
+
+    <hr>
+    <div class="form-group">
+      <label class="form-control-label" for="ListingDuration">Listing Duration</label>
+      <select name="ebayParams[ListingDuration]" class="form-control" id="ListingDuration">
+        <option value="GTC">GTC - Good til cancelled</option>
+        <option value="Days_1">Days_1  A one-day listing duration is typically only available to sellers with a Feedback score of 10 or higher, so sellers with a Feedback score of less than 10 may be restricted from using a one-day listing duration. </option>
+        <option value="Days_3">Days_3  This value is used to set the duration of the listing to three days.  </option>
+        <option value="Days_5">Days_5  This value is used to set the duration of the listing to five days.  </option>
+        <option value="Days_7">Days_7  This value is used to set the duration of the listing to seven days.  </option>
+        <option value="Days_10">Days_10 This value is used to set the duration of the listing to 10 days.  </option>
+        <option value="Days_14">Days_14 This value is used to set the duration of the listing to 14 days.  </option>
+        <option value="Days_21">Days_21 This value is used to set the duration of the listing to 21 days.  </option>
+        <option value="Days_30">Days_30 This value is used to set the duration of the listing to 30 days.  </option>
+        <option value="Days_60">Days_60 This value is used to set the duration of the listing to 60 days.  </option>
+        <option value="Days_90">Days_90 This value is used to set the duration of the listing to 90 days.  </option>
+        <option value="Days_120">Days_120  This value is used to set the duration of the listing to 120 days.  </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-control-label" for="ListingType">Listing Type</label>
+      <select name="ebayParams[ListingType]" class="form-control" id="ListingType">
+        <option value="FixedPriceItem">FixedPriceItem</option>
+        <option value="Chinese">Chinese</option>
+      </select>
     </div>
 
     <button type="submit" class="btn btn-success">Publish to eBay</button>

@@ -30,5 +30,17 @@ Template.importResults_form.events({
     let originalPrice  = parseFloat(t.$('#original-price').val().replace(/[^\d\.]/g, ''));
     let resultingPrice = multiplier * originalPrice;
     t.$('#resulting-price').val(resultingPrice);
+  },
+  'submit form': function(e, t) {
+    e.preventDefault();
+    var dataObj = $(e.target).serializeJSON({
+      useIntKeysAsArrayIndex : true,
+      checkboxUncheckedValue : "false",
+      parseBooleans          : true,
+      parseNumbers           : true
+    });
+
+    console.log(dataObj)
+    
   }
 });

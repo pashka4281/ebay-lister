@@ -2,15 +2,15 @@
   <label class="form-control-label">{{ label }}</label>
   <select class="form-control js-category" name="{{ inputName }}">
     {{#if isCategoriesLoading }}
-      <option>Loading ...</option>
+      <option value="">Loading ...</option>
     {{ else }}
       {{#if categories.length }}
-        <option>Select a category...</option>
+        <option value="">Select a category...</option>
         {{#each category in categories }}
           <option value="{{ category.CategoryID }}">{{ category.CategoryName }}</option>
         {{/each}}
       {{ else }}
-        <option>No categories loaded</option>
+        <option value="">No categories loaded</option>
       {{/if }}
     {{/if }}
   </select>
