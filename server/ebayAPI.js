@@ -2,6 +2,7 @@ import ebay from 'ebay-api';
 import { Meteor } from 'meteor/meteor';
 import { ScrapedPages } from '../common/collections';
 import xml2js from 'xml2js';
+import { check } from 'meteor/check';
 
 let apiEndpoint    = "https://api.sandbox.ebay.com/ws/api.dll";
 let xmlRequestSync = Meteor.wrapAsync(ebay.xmlRequest);
@@ -118,7 +119,7 @@ let ebayAPI = {
     if (!ebayParams) throw new Meteor.Error("ebayParams is empty on a scrapedPage! Can't proceed");
 
     let imagesArray = scrapedPage.scrapedData.images.map((img) => {
-      { PictureURL: img }
+      return { PictureURL: img };
     });
 
 
@@ -134,7 +135,7 @@ let ebayAPI = {
         PrimaryCategory: {
           CategoryID: ebayParams.categoryId
         },
-        StartPrice: ebayParams.price,
+        StartPrice: ebayParams.fullPrice,
         CategoryMappingAllowed: true,
         ConditionID: 4000,
         Country: "US",
@@ -170,6 +171,8 @@ let ebayAPI = {
     };
 
     try {
+      //console.log(scrapedPage)
+      //console.log(params)
       let response = xmlRequestSync({
         serviceName: 'Trading',
         opType: 'VerifyAddItem',
@@ -184,7 +187,7 @@ let ebayAPI = {
 
       console.log(response)
     } catch(err) {
-      let parsed = parseXmlSync(err.requestContext.response.body)
+      let parsed = parseXmlSync(err.requestContext.response.body);
       return parsed.VerifyAddItemResponse;
     }
   }

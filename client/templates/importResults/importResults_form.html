@@ -2,7 +2,7 @@
   <form>
     <div class="form-group">
       <label class="form-control-label" for="title">Title</label>
-      <input value="{{ scrapedPage.scrapedData.title }}" class="form-control" id="title" />
+      <input value="{{ scrapedPage.scrapedData.title }}" class="form-control" id="title" name="title" />
     </div>
 
     <div class="form-group">
@@ -12,7 +12,7 @@
 
     <div class="form-group">
       <label class="form-control-label" for="details-area">Description</label>
-      <textarea id="details-area">{{{ scrapedPage.scrapedData.details }}}</textarea>
+      <textarea id="details-area" name="description">{{{ scrapedPage.scrapedData.details }}}</textarea>
     </div>
 
     <div class="form-group">
@@ -28,7 +28,7 @@
         </div>
         <div class="col-1 text-center lead">=</div>
         <div class="col-2">
-          <input type="text" class="form-control" id="resulting-price" name="total-price" />
+          <input type="text" class="form-control" id="resulting-price" name="fullPrice" />
           <small>(Total price)</small>
         </div>
       </div>
@@ -48,7 +48,7 @@
     <hr>
     <div class="form-group">
       <label class="form-control-label" for="ListingDuration">Listing Duration</label>
-      <select name="ebayParams[ListingDuration]" class="form-control" id="ListingDuration">
+      <select name="ListingDuration" class="form-control" id="ListingDuration">
         <option value="GTC">GTC - Good til cancelled</option>
         <option value="Days_1">Days_1  A one-day listing duration is typically only available to sellers with a Feedback score of 10 or higher, so sellers with a Feedback score of less than 10 may be restricted from using a one-day listing duration. </option>
         <option value="Days_3">Days_3  This value is used to set the duration of the listing to three days.  </option>
@@ -66,7 +66,7 @@
 
     <div class="form-group">
       <label class="form-control-label" for="ListingType">Listing Type</label>
-      <select name="ebayParams[ListingType]" class="form-control" id="ListingType">
+      <select name="ListingType" class="form-control" id="ListingType">
         <option value="FixedPriceItem">FixedPriceItem</option>
         <option value="Chinese">Chinese</option>
       </select>
