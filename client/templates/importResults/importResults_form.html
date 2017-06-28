@@ -72,6 +72,10 @@
       </select>
     </div>
 
-    <button type="submit" class="btn btn-success">Publish to eBay</button>
+    {{#if isSubmitBtnDisabled }}
+      <a class="btn btn-success disabled" href="#" disabled>Loading ...</a>
+    {{ else}}
+      <a id="submit-btn" class="btn btn-success" href="#">Save & publish</a>
+    {{/if}}
   </form>
 </template>

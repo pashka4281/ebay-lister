@@ -4,6 +4,7 @@ import 'ckeditor';
 
 Template.importResults_form.onCreated(function() {
   this.currentCategoryId = new ReactiveVar("");
+  this.isSubmitBtnDisabled = new ReactiveVar(false);
 });
 
 Template.importResults_form.onRendered(function() {
@@ -18,6 +19,10 @@ Template.importResults_form.helpers({
   'getCurrentCategoryId': function() {
     let t = Template.instance();
     return [t.currentCategoryId.get()];
+  },
+  'isSubmitBtnDisabled': function() {
+    let t = Template.instance();
+    return t.isSubmitBtnDisabled.get();
   }
 });
 
@@ -34,9 +39,10 @@ Template.importResults_form.events({
     t.$('#resulting-price').val(resultingPrice);
   },
 
-  'submit form': function(e, t) {
+  'click #submit-btn': function(e, t) {
     e.preventDefault();
-    var dataObj = $(e.target).serializeJSON({
+
+    var dataObj = t.$('form').serializeJSON({
       useIntKeysAsArrayIndex : true,
       checkboxUncheckedValue : "false",
       parseBooleans          : true,
@@ -45,14 +51,19 @@ Template.importResults_form.events({
 
     console.log(dataObj)
     let scrapedPageId = FlowRouter.getParam("_id"); 
+    t.isSubmitBtnDisabled.set(true);
 
     ScrapedPages.update({ _id: scrapedPageId }, {$set: { ebayParams: dataObj }}, (err, res) => {
-      if (err)
+      if (err) {
         console.log(err)
+        t.isSubmitBtnDisabled.set(false);
+      }
 
       if (res) {
         console.log("Item saved, trying to post to ebay now...");
         Meteor.call('ebay.addItem', scrapedPageId, function(err, res) {
+          t.isSubmitBtnDisabled.set(false);
+
           if (err)
             console.log(err)
 
