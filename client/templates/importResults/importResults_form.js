@@ -4,6 +4,7 @@ import 'ckeditor';
 
 Template.importResults_form.onCreated(function() {
   this.currentCategoryId = new ReactiveVar("");
+  this.currentSubcategoryId = new ReactiveVar("");
   this.isSubmitBtnDisabled = new ReactiveVar(false);
 });
 
@@ -20,6 +21,10 @@ Template.importResults_form.helpers({
     let t = Template.instance();
     return [t.currentCategoryId.get()];
   },
+  'getCurrentSubcategoryId': function() {
+    let t = Template.instance();
+    return [t.currentSubcategoryId.get()];
+  },
   'isSubmitBtnDisabled': function() {
     let t = Template.instance();
     return t.isSubmitBtnDisabled.get();
@@ -28,8 +33,11 @@ Template.importResults_form.helpers({
 
 Template.importResults_form.events({
   'change select[name="categoryId"]': function(e, t) {
-    let parentCategoryId = e.target.value;
-    t.currentCategoryId.set(parentCategoryId);
+    t.currentCategoryId.set(e.target.value);
+  },
+
+  'change select[name="subcategoryId"]': function(e, t) {
+    t.currentSubcategoryId.set(e.target.value);
   },
 
   'input #price-multiplier': function(e, t) {

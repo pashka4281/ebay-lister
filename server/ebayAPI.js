@@ -9,18 +9,17 @@ let xmlRequestSync = Meteor.wrapAsync(ebay.xmlRequest);
 let parseXmlSync   = Meteor.wrapAsync(xml2js.parseString);
 
 let ebayAPI = {
-  getCategory: function(parentCategoryId) {
+  getCategory: function({ parentCategoryId, levelLimit }) {
     let user = Meteor.user();
 
     let params = {
       CategorySiteID: "0",
       DetailLevel: "ReturnAll",
-      LevelLimit: 1
+      LevelLimit: levelLimit
     };
 
     if (parentCategoryId) {
       params.CategoryParent = parentCategoryId;
-      params.LevelLimit = 2;
     }
 
     let response = xmlRequestSync( {
@@ -122,6 +121,16 @@ let ebayAPI = {
       return { PictureURL: img };
     });
 
+    // setting the deepest category as a main categ. in our request:
+    let categoryID = ebayParams.categoryId;
+    if (ebayParams.subcategoryId)
+      categoryID = ebayParams.subcategoryId;
+    if (ebayParams.subcategory2Id)
+      categoryID = ebayParams.subcategory2Id;
+
+    //console.log(ebayParams.categoryId)
+    //console.log(ebayParams.subcategoryId)
+    //console.log(ebayParams.subcategory2Id)
 
     let params = {
       //CategorySiteID: "0",
@@ -133,7 +142,7 @@ let ebayAPI = {
         Title: ebayParams.title,
         Description: ebayParams.description,
         PrimaryCategory: {
-          CategoryID: ebayParams.categoryId
+          CategoryID: categoryID
         },
         StartPrice: ebayParams.fullPrice,
         CategoryMappingAllowed: true,

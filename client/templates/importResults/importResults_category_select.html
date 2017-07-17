@@ -1,17 +1,21 @@
 <template name="importResults_categorySelect">
-  <label class="form-control-label">{{ label }}</label>
-  <select class="form-control js-category" name="{{ inputName }}">
-    {{#if isCategoriesLoading }}
-      <option value="">Loading ...</option>
-    {{ else }}
-      {{#if categories.length }}
-        <option value="">Select a category...</option>
-        {{#each category in categories }}
-          <option value="{{ category.CategoryID }}">{{ category.CategoryName }}</option>
-        {{/each}}
+  <div class="row">
+  <label class="col-sm-4 control-label">{{ label }}</label>
+  <div class="col-sm-8">
+    <select class="form-control js-category" name="{{ inputName }}">
+      {{#if isCategoriesLoading }}
+        <option value="">Loading ...</option>
       {{ else }}
-        <option value="">No categories loaded</option>
+        {{#if categories.length }}
+          <option value="">Select a category...</option>
+          {{#each category in categories }}
+            <option value="{{ category.CategoryID }}">{{ category.CategoryName }}</option>
+          {{/each}}
+        {{ else }}
+          <option value="">No categories loaded</option>
+        {{/if }}
       {{/if }}
-    {{/if }}
-  </select>
+    </select>
+  </div>
+  </div>
 </template>

@@ -2,21 +2,14 @@ Template.importResults_categorySelect.onCreated(function() {
   this.categories          = new ReactiveVar([]);
   this.isCategoriesLoading = new ReactiveVar(false);
 
-  let getCategoryCallback = (err, data) => {
+  const getCategoryCallback = (err, data) => {
     this.isCategoriesLoading.set(false);
     if (data)
       this.categories.set(data);
   };
 
-  if (this.data.hasOwnProperty("parentCategoryId")) {
-    if (this.data.parentCategoryId) {
-      this.isCategoriesLoading.set(true);
-      Meteor.call('ebay.getCategory', this.data.parentCategoryId, getCategoryCallback);
-    }
-  } else {
-    this.isCategoriesLoading.set(true);
-    Meteor.call('ebay.getCategory', getCategoryCallback);
-  }
+  if (this.data.levelLimit === 1 || this.data.parentCategoryId)
+    Meteor.call('ebay.getCategory', { levelLimit: this.data.levelLimit, parentCategoryId: this.data.parentCategoryId }, getCategoryCallback);
 });
 
 Template.importResults_categorySelect.helpers({

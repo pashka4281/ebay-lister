@@ -32,8 +32,10 @@ Meteor.methods({
     return items;
   },
 
-  'ebay.getCategory': function(parentCategoryId) {
-    return ebayAPI.getCategory(parentCategoryId);
+  'ebay.getCategory': function(params) {
+    check(params.levelLimit, Number);
+
+    return ebayAPI.getCategory(params);
   },
 
   'ebay.validateItemBeforeSubmitting': function() {
