@@ -6,13 +6,13 @@
 </template>
 
 <template name="navbar">
-  <nav class="navbar navbar-toggleable-md navbar-light bg-faded mb-5">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+    <a class="navbar-brand" href="/">xLister</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="/">xLister</a>
 
-    <div class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       {{#if currentUser }}
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
@@ -22,9 +22,8 @@
             <a class="nav-link" href="/profile">Profile</a>
           </li>
         </ul>
-
         <ul class="navbar-nav">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="/">Logout</a>
           </li>
         </ul>

@@ -26,6 +26,8 @@ Template.login.events({
     Meteor.loginWithPassword(email, password, function(error) {
       if (error) {
         t.formError.set(error.reason);
+      } else {
+        FlowRouter.reload();
       }
     });
   }
